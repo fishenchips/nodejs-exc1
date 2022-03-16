@@ -58,11 +58,14 @@ app.post("/cars", (req, res) => {
 app.put("/cars/:id", (req, res) => {
     const id = parseInt(req.params.id)
 
-    //determine what index
-    const i = cars.findIndex(c => c.id === id)
+    //find the car we want to update
+    const car = cars.find(c => c.id === id)
 
-    cars[i].model = car.make
-    
+    //update its properties
+    car.make = req.body.make
+    car.model = req.body.model
+
+    res.send(car)
 })
 
 app.delete("/cars/:id", (req, res) => {
