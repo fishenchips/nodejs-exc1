@@ -1,5 +1,7 @@
+//to be able to use express module
 const express = require("express")
 
+//load in cars "api"
 const cars = require("./cars.js")
 
 // get a new id from array
@@ -54,13 +56,27 @@ app.post("/cars", (req, res) => {
 })
 
 app.put("/cars/:id", (req, res) => {
-    //TODO: Update a car
+    const id = parseInt(req.params.id)
+
+    //determine what index
+    const i = cars.findIndex(c => c.id === id)
+
+    cars[i].model = car.make
+    
 })
 
 app.delete("/cars/:id", (req, res) => {
-    //TODO: Delete a car
+    const id = parseInt(req.params.id)
+
+    //need the index to remove right car
+    const i = cars.findIndex(c => c.id === id)
+
+    cars.splice(i, 1)
+
+    res.send(cars)
 })
 
-app.listen(8000, ()=> {
-    console.log("http://localhost:8000")
+// at the bottom
+app.listen(8080, ()=> {
+    console.log("http://localhost:8080")
 })
